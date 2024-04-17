@@ -22,7 +22,13 @@ public class Personaje {
      * @param maxPesoPorPersonaje
      */
     public Personaje(String nombre, int vida, int ataque, int defensa, int destreza, int maxItemsPorPersonaje, double maxPesoPorPersonaje) {
-
+        this.nombre = nombre;
+        this.vida = vida;
+        this.ataque = ataque;
+        this.defensa = defensa;
+        this.destreza = destreza;
+        this.maxPesoPorPersonaje = maxPesoPorPersonaje;
+        items = new Item[maxItemsPorPersonaje];
     }
 
     /**
