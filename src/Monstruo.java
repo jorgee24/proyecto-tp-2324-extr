@@ -15,10 +15,10 @@ public class Monstruo {
      * @param defensa
      */
     public Monstruo(String nombre, int vida, int ataque, int defensa) {
-        this.nombre=nombre;
-        this.vida=vida;
-        this.ataque=ataque;
-        this.defensa=defensa;
+        this.nombre = nombre;
+        this.vida = vida;
+        this.ataque = ataque;
+        this.defensa = defensa;
 
     }
 
