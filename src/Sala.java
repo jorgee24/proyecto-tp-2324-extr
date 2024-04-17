@@ -22,6 +22,12 @@ public class Sala {
      * @param columna
      */
     public Sala(String descripcion, int max_items, int max_monstruos, int maxTrampasPorSala, int fila, int columna) {
+        this.descripcion = descripcion;
+        this.fila = fila;
+        this.columna = columna;
+        items = new Item[max_items];
+        trampas= new  Trampa[maxTrampasPorSala];
+        monstruos = new  Monstruo[max_monstruos];
 
     }
 

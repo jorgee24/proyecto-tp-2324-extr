@@ -13,6 +13,9 @@ public class Item {
      * @param valor
      */
     public Item(String descripcion, double peso, double valor) {
+        this.descripcion=descripcion;
+        this.peso=peso;
+        this.valor=valor;
 
     }
 
