@@ -40,6 +40,13 @@ public class Personaje {
      * @return
      */
     public static Personaje crearPersonaje(Scanner teclado) {
+        String nombre = Utilidades.leerCadena(teclado, "Introduzca un nombre: ");
+        int vida = Utilidades.leerNumero(teclado, "Introduzca numero de vidas: ", 50, 247);
+        int ataque = Utilidades.leerNumero(teclado,"Puntos de ataque del personaje: ", 1, 250-vida);
+        int defensa = Utilidades.leerNumero(teclado, "Puntos de defensa del personaje: ", 1, 250 - ataque);
+        int destreza = Utilidades.leerNumero(teclado, "Puntos de destreza: ", 1, 250 - defensa);
+        Personaje personaje = new Personaje(nombre, vida, ataque, defensa, destreza);
+
 
     }
 
