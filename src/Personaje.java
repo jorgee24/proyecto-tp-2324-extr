@@ -45,6 +45,8 @@ public class Personaje {
         int ataque = Utilidades.leerNumero(teclado,"Puntos de ataque del personaje: ", 1, 250-vida);
         int defensa = Utilidades.leerNumero(teclado, "Puntos de defensa del personaje: ", 1, 250 - ataque);
         int destreza = Utilidades.leerNumero(teclado, "Puntos de destreza: ", 1, 250 - defensa);
+        int maxPesoPorPersonaje =;
+        Item[];
         Personaje personaje = new Personaje(nombre, vida, ataque, defensa, destreza);
 
 
@@ -105,8 +107,11 @@ public class Personaje {
      * @return
      */
     public Item getItem(int indice) {
-
-            return
+        Item resultado = null;
+        while (items[indice] != null){
+            resultado = items[indice];
+        }
+            return resultado;
     }
 
     /**
@@ -115,7 +120,7 @@ public class Personaje {
      * @param danyo
      */
     public void recibirDanyo(int danyo) {
-
+        if (danyo ==)
     }
 
     /**
