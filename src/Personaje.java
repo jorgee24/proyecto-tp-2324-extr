@@ -134,6 +134,10 @@ public class Personaje {
      * @return
      */
     public boolean anyadirItem(Item item) {
+        boolean resultado = false;
+        if (item > maxPesoPorPersonaje){
+
+        }
 
             return
     }
@@ -146,7 +150,7 @@ public class Personaje {
      */
     @Override
     public String toString() {
-        return
+        return nombre + "(V: " + vida + ", A: " + ataque + ", D: " + defensa + ", X: " + destreza;
     }
 
     /**
@@ -155,8 +159,12 @@ public class Personaje {
      * @return
      */
     public double getPesoMochila() {
-
-        return
+        double resultado = 0;
+        for (int i = 0; i < items.length; i++){
+            double pesoI = items[i].getPeso();
+            resultado += pesoI;
+        }
+        return resultado;
     }
 
     /**
@@ -165,8 +173,11 @@ public class Personaje {
      * @return
      */
     public double getValorMochila() {
-
-        return
+        double resultado = 0;
+        for (int i = 0; i < items.length; i++){
+            resultado = items[i].getValor();
+        }
+        return resultado;
     }
 
     /**
@@ -180,7 +191,6 @@ public class Personaje {
      * @return
      */
     public String infoMochila() {
-
-        return
+        return "Mochila de " + nombre + ": " +
     }
 }
