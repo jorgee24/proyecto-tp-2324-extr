@@ -61,7 +61,9 @@ public class Monstruo {
      * @param ataque
      */
     public void recibirDanyo(int ataque) {
-
+        if (ataque > 0){
+            vida = vida - ataque;
+        }
     }
 
     /**
@@ -72,7 +74,7 @@ public class Monstruo {
      */
     @Override
     public String toString() {
-        return
+        return "[ " + nombre + "(V: " + vida + ", A: " + ataque + ", D: " + defensa + ") ]";
     }
 
     /**
@@ -84,7 +86,10 @@ public class Monstruo {
      */
     @Override
     public boolean equals(Object obj) {
-
+        boolean resultado = false;
+        if (obj.equals(vida) && obj.equals(nombre) && obj.equals(ataque) && obj.equals(defensa)){
+            resultado = true;
+        }
         return
     }
 }
