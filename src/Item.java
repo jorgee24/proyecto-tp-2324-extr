@@ -16,7 +16,6 @@ public class Item {
         this.descripcion=descripcion;
         this.peso=peso;
         this.valor=valor;
-
     }
 
     /**
@@ -51,7 +50,8 @@ public class Item {
      */
     @Override
     public String toString() {
-        return
+        String mensaje = "(Peso " + peso + ", Valor: " + valor + ")";
+        return mensaje;
     }
 
     /**
@@ -63,7 +63,10 @@ public class Item {
      */
     @Override
     public boolean equals(Object obj) {
-
-        return
+        boolean resultado = false;
+        if (obj.equals(peso) && obj.equals(valor) && obj.equals(descripcion)){
+            resultado = true;
+        }
+        return resultado;
     }
 }
