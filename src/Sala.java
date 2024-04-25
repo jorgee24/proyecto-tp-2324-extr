@@ -279,10 +279,18 @@ public class Sala {
      * @return
      */
     public Item seleccionarItem(Scanner teclado) {
+        Item resultado = null;
         for (int i = 0; i < items.length; i++){
             System.out.println(items[i].toString());
         }
-        return
+        System.out.println("Introduzca una descripcion");
+        String resultado1 = teclado.next();
+        for (int i = 0; i < items.length; i++){
+            if (items[i].getDescripcion() == resultado1){
+                resultado = items[i];
+            }
+        }
+        return resultado;
     }
 
     /**
