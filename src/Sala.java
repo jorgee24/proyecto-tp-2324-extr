@@ -299,7 +299,9 @@ public class Sala {
      *  items que hay en la sala
      */
     private void listarItems() {
-
+        for (int i = 0; i < items.length; i++){
+            System.out.println(items.toString());
+        }
     }
 
     /**
@@ -308,6 +310,11 @@ public class Sala {
      * @param descripcion
      */
     public void eliminarItem(String descripcion) {
-
+        for (int i = 0; i < items.length; i++){
+            if (items[i].getDescripcion() == descripcion){
+                items[i + 1] = items[i];
+                items.length--;
+            }
+        }
     }
 }
