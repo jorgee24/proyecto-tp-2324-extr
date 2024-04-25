@@ -38,8 +38,18 @@ public class Sala {
      * @return
      */
     public boolean agregarItem(Item item) {
+        boolean resultado = false;
+        int i = 0;
+        while (i < items.length && !items.lleno){
+            i++;
+            if (item != items[i]){
+                resultado = true;
+            }
+        }
 
-            return
+        items.length++;
+        items[i+1] = item;
+
     }
 
     /**
@@ -50,8 +60,19 @@ public class Sala {
      * @return
      */
     public boolean agregarMonstruo(Monstruo monstruo) {
-
-            return
+        boolean resultado = false;
+        int i = 0;
+        while (i < monstruos.length){
+            if (monstruo != monstruos[i]){
+                resultado = true;
+            }
+            i++;
+        }
+        if (monstruos[i] != monstruo){
+            monstruos++;
+            monstruos[i+1] = monstruo;
+        }
+        return resultado;
     }
 
     /**
@@ -62,8 +83,7 @@ public class Sala {
      * @return
      */
     public boolean agregarTrampa(Trampa trampa) {
-
-            return
+        return
     }
 
     /**
