@@ -164,7 +164,9 @@ public class Sala {
      * TODO mostrar por pantalla la info de los monstruos utilizando los métodos implementados en la clase "monstruo"
      */
     private void listarMonstruos() {
-
+        for (int i = 0; i < monstruos.length; i++){
+            monstruos[i].toString();
+        }
     }
 
     /**
@@ -173,7 +175,12 @@ public class Sala {
      * @param nombreMonstruo
      */
     public void eliminarMonstruo(String nombreMonstruo) {
-
+        for (int i = 0; i < monstruos.length; i++){
+            if (monstruos[i].getNombre() == nombreMonstruo){
+                monstruos[i + 1] = monstruos[i];
+                monstruos.length--;
+            }
+        }
     }
 
     /**
@@ -182,8 +189,13 @@ public class Sala {
      * @return
      */
     public boolean hayTrampas() {
-
-        return
+        boolean resultado = false;
+        for (int i = 0; i < trampas.length; i++){
+            if (trampas[i] != null){
+                resultado = true;
+            }
+        }
+        return resultado;
     }
 
     /**
