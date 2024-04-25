@@ -131,7 +131,7 @@ public class Sala {
     public Monstruo seleccionarMonstruo(Scanner teclado) {
         Monstruo resultado = null;
         for (int i = 0; i < monstruos.length; i++){
-            monstruos[i].toString();
+            System.out.println(monstruos[i].toString());
         }
         System.out.println("¿Que monstruo desea seleccionar?");
         String resultado1 = teclado.next();
@@ -254,8 +254,13 @@ public class Sala {
      * @return
      */
     public Trampa buscarTrampa(String descripcion) {
-
-        return
+        Trampa resultado = null;
+        for (int i = 0; i < trampas.length; i++){
+            if (trampas[i].getDescripcion() == descripcion){
+                resultado = trampas[i];
+            }
+        }
+        return resultado;
     }
 
     /**
@@ -274,7 +279,9 @@ public class Sala {
      * @return
      */
     public Item seleccionarItem(Scanner teclado) {
-
+        for (int i = 0; i < items.length; i++){
+            System.out.println(items[i].toString());
+        }
         return
     }
 
