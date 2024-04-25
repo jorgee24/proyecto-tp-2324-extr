@@ -220,8 +220,13 @@ public class Sala {
      * @return
      */
     public boolean hayItems() {
-
-        return
+        boolean resultado = false;
+        for (int i = 0; i < items.length; i++){
+            if (items[i] != null){
+                resultado = true;
+            }
+        }
+        return resultado;
     }
 
     /**
@@ -232,8 +237,13 @@ public class Sala {
      * @return
      */
     public Item buscarItem(String descripcion) {
-
-        return
+        Item resultado = null;
+        for (int i = 0; i < items.length; i++){
+            if (items[i].getDescripcion() == descripcion){
+                resultado = items[i];
+            }
+        }
+        return resultado;
     }
 
     /**
