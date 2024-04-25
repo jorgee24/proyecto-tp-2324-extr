@@ -83,7 +83,19 @@ public class Sala {
      * @return
      */
     public boolean agregarTrampa(Trampa trampa) {
-        return
+        boolean resultado = false;
+        int i = 0;
+        while (i < trampas.length){
+            i++;
+            if (trampas[i] != trampa){
+                resultado = true;
+            }
+        }
+        if (trampas[i] != trampa){
+            trampas++;
+            trampas[i + 1] = trampa;
+        }
+        return resultado;
     }
 
     /**
@@ -100,8 +112,13 @@ public class Sala {
      * @return
      */
     public boolean hayMonstruos() {
-
-        return
+        boolean resultado = false;
+        for (int i = 0; i < monstruos.length; i++){
+            if (monstruos[i] != null){
+                resultado = true;
+            }
+        }
+        return resultado;
     }
 
     /**
@@ -112,8 +129,14 @@ public class Sala {
      * @return
      */
     public Monstruo seleccionarMonstruo(Scanner teclado) {
+        Monstruo resultado;
+        for (int i = 0; i < monstruos.length; i++){
+            monstruos[i].toString();
+        }
+        System.out.println("¿Que monstruo desea seleccionar?");
+        String resultado1 = teclado.next();
 
-        return
+        return resultado;
     }
 
     /**
