@@ -13,9 +13,9 @@ public class Utilidades {
      * @return
      */
     public static String leerCadena(Scanner teclado, String s) {
-        System.out.println("Introduzca una cadena: ");
-        s = teclado.next();
-        return s;
+        System.out.print(s);
+        return teclado.next();
+
     }
 
     /**
@@ -30,11 +30,13 @@ public class Utilidades {
      */
     // Solicita un número repetidamente hasta que se introduzca uno correcto (dentro de los límites)
     public static int leerNumero(Scanner teclado, String mensaje, int minimo, int maximo) {
-        int numero;
-        do {
-            System.out.println("Introduzca un numero: ");
+        System.out.print(mensaje);
+        int numero = teclado.nextInt();
+        while (numero > maximo || numero < minimo) {
+            System.out.println("Número incorrecto");
+            System.out.print(mensaje);
             numero = teclado.nextInt();
-        } while (numero > maximo || numero < minimo);
+        }
         return numero;
     }
 }
