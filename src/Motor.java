@@ -21,7 +21,7 @@ public class Motor {
      * @param maxTrampasPorSalas
      */
     public Motor(int filas, int columnas, int maxItemsPorSala, int maxMonstruosPorSala, int maxTrampasPorSalas) {
-
+        mapa[][] = new Sala(maxItemsPorSala, maxMonstruosPorSala, maxTrampasPorSalas, filas, columnas);
     }
 
     /**
