@@ -90,6 +90,6 @@ public class Monstruo {
         if (obj.equals(vida) && obj.equals(nombre) && obj.equals(ataque) && obj.equals(defensa)){
             resultado = true;
         }
-        return
+        return resultado;
     }
 }
