@@ -22,6 +22,9 @@ public class Motor {
      */
     public Motor(int filas, int columnas, int maxItemsPorSala, int maxMonstruosPorSala, int maxTrampasPorSalas) {
         mapa[][] = new Sala(maxItemsPorSala, maxMonstruosPorSala, maxTrampasPorSalas, filas, columnas);
+        this.maxItemsPorSala = maxItemsPorSala;
+        this.maxMonstruosPorSala = maxMonstruosPorSala;
+        this.maxTrampasPorSala = maxTrampasPorSalas;
     }
 
     /**
