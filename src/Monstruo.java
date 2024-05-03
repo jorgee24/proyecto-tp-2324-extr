@@ -19,7 +19,6 @@ public class Monstruo {
         this.vida = vida;
         this.ataque = ataque;
         this.defensa = defensa;
-
     }
 
     /**
