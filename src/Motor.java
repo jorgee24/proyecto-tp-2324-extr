@@ -90,7 +90,13 @@ public class Motor {
      * @return
      */
     public Sala getSala(int fila, int columna) {
-        return
+        Sala sala = null;
+        for (int i = 0; i < ; i++){
+            for (int j = 0; j < ; j++){
+
+            }
+        }
+        return sala;
     }
 
     /**
@@ -127,7 +133,11 @@ public class Motor {
      * @param random
      */
     public void jugar(Scanner teclado, Personaje personaje, Random random) {
+        System.out.println(mapa);
 
+        if (personaje.getVida() != 0 && posiciom){
+            personaje.
+        }
     }
 
     /**
