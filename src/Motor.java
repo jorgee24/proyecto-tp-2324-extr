@@ -134,9 +134,13 @@ public class Motor {
      */
     public void jugar(Scanner teclado, Personaje personaje, Random random) {
         System.out.println(mapa);
-
+        Sala sala = null;
         if (personaje.getVida() != 0 && posiciom){
-            personaje.
+            sala = personaje.getItems().
+        }
+        sala.toString();
+        if (sala.hayMonstruos()){
+
         }
     }
 
