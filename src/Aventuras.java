@@ -17,8 +17,23 @@ public class Aventuras {
      * @param args
      */
     public static void main(String[] args) {
+        if (args.length != 10){
+            System.out.println("Numero de argumentos incorrectos");
+        }
 
-    }
+        Motor motor = new Motor(Integer.parseInt(args[0]), Integer.parseInt(args[1]), Integer.parseInt(args[2]), Integer.parseInt(args[3]), Integer.parseInt(args[4]));
+        motor.iniciar(args[5], args[6], args[7], args[8]);
+
+        Scanner tecladoPersonaje = new Scanner(System.in);
+        Personaje personaje = Personaje.crearPersonaje(tecladoPersonaje);
+
+        Scanner tecladoMotor = new Scanner(System.in);
+        Random random = new Random();
+        motor.jugar(tecladoMotor, personaje, random);
+
+        System.out.println();
+        guardarPuntuacion(args[9], personaje);
+        mostrarPuntuaciones(args[9]);
 
     /**
      * Metodo guardarPuntuación en fichero
