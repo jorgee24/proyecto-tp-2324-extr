@@ -108,8 +108,37 @@ public class Motor {
      * @return
      */
     public String mostrarMapa(int fila, int columna) {
+        int filas = mapa.length;
+        int columnas = mapa[0].length;
+        String informacion = "";
 
-    return
+        informacion += "¬";
+        for (int i = 0; i < columnas; i++){
+            informacion += "=";
+        }
+        informacion += "¬\n";
+
+        for (int i = 0; i < filas; i++){
+            informacion += "||";
+            for (int j = 0; j < columnas; j++){
+                if (i == fila && j == columna){
+                    informacion += "@";
+                } else if (mapa[i][j] != null) {
+                    informacion += " ";
+                } else {
+                    informacion += " ";
+                }
+            }
+            informacion += "||\n";
+        }
+
+        informacion += "¬";
+        for (int i = 0; i < columnas; i++){
+            informacion += "=";
+        }
+        informacion += "¬\n";
+
+        return informacion;
 }
 
     /**
@@ -135,7 +164,7 @@ public class Motor {
     public void jugar(Scanner teclado, Personaje personaje, Random random) {
         System.out.println(mapa);
         Sala sala = null;
-        if (personaje.getVida() != 0 && posiciom){
+        if (personaje.getVida() != 0 && posicion){
             sala = personaje.getItems().
         }
         sala.toString();
