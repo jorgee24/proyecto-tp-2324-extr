@@ -21,7 +21,7 @@ public class Motor {
      * @param maxTrampasPorSalas
      */
     public Motor(int filas, int columnas, int maxItemsPorSala, int maxMonstruosPorSala, int maxTrampasPorSalas) {
-        mapa[][] = new Sala(maxItemsPorSala, maxMonstruosPorSala, maxTrampasPorSalas, filas, columnas);
+        mapa = new Sala[filas][columnas];
         this.maxItemsPorSala = maxItemsPorSala;
         this.maxMonstruosPorSala = maxMonstruosPorSala;
         this.maxTrampasPorSala = maxTrampasPorSalas;
@@ -36,8 +36,37 @@ public class Motor {
      * @return sala generada
      */
     Sala[][] cargarMapa(String ficheroMapa) {
-
-        return
+        BufferedReader entrada = null;
+        try {
+            entrada = new BufferedReader(new FileReader(ficheroMapa));
+            String linea;
+            while ((linea = entrada.readLine()) != null) {
+                String[] partes = linea.split(";");
+                if (partes.length == 3) {
+                    int filas = Integer.parseInt(partes[0]);
+                    int columnas = Integer.parseInt(partes[1]);
+                    if (filas > 0) filas--;
+                    if (columnas > 0) columnas--;
+                    String descripcion = partes[2];
+                    Sala sala = new Sala(descripcion, maxItemsPorSala, maxMonstruosPorSala, maxTrampasPorSala, filas,
+                            columnas);
+                    mapa[filas][columnas] = sala;
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("No se ha encontrado el fichero");
+        } catch (IOException e) {
+            System.out.println("Error de lectura");
+        } finally {
+            try {
+                if (entrada != null) {
+                    entrada.close();
+                }
+            } catch (IOException e) {
+                System.out.println("Error al cerrar el fichero");
+            }
+        }
+        return mapa;
     }
 
     /**
@@ -47,8 +76,37 @@ public class Motor {
      * @param ficheroItems
      */
     private void cargarItems(String ficheroItems) {
-
+        BufferedReader entrada = null;
+        try {
+            entrada = new BufferedReader(new FileReader(ficheroItems));
+            String linea;
+            while ((linea = entrada.readLine()) != null) {
+                String[] partes = linea.split(";");
+                int fila = Integer.parseInt(partes[0]);
+                if (fila > 0) fila--;
+                int columna = Integer.parseInt(partes[1]);
+                if (columna > 0) columna--;
+                String descripcion = partes[2];
+                Double valor = Double.parseDouble(partes[3]);
+                int peso = Integer.parseInt(partes[4]);
+                Item item = new Item(descripcion, valor, peso);
+                mapa[fila][columna].agregarItem(item);
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("No se ha encontrado el fichero");
+        } catch (IOException e) {
+            System.out.println("Error de lectura");
+        } finally {
+            try {
+                if (entrada != null) {
+                    entrada.close();
+                }
+            } catch (IOException e) {
+                System.out.println("Error al cerrar el fichero");
+            }
+        }
     }
+
 
     /**
      * Método cargarMonstruos para agregar los monstruos del fichero en el mapa
@@ -57,7 +115,36 @@ public class Motor {
      * @param ficheroMonstruos
      */
     private void cargarMonstruos(String ficheroMonstruos) {
-
+        BufferedReader entrada = null;
+        try {
+            entrada = new BufferedReader(new FileReader(ficheroMonstruos));
+            String linea;
+            while ((linea = entrada.readLine()) != null) {
+                String[] partes = linea.split(";");
+                int fila = Integer.parseInt(partes[0]);
+                if (fila > 0) fila--;
+                int columna = Integer.parseInt(partes[1]);
+                if (columna > 0) columna--;
+                String descripcion = partes[2];
+                int vida = Integer.parseInt(partes[3]);
+                int ataque = Integer.parseInt(partes[4]);
+                int defensa = Integer.parseInt(partes[5]);
+                Monstruo monstruo = new Monstruo(descripcion, vida, ataque, defensa);
+                mapa[fila][columna].agregarMonstruo(monstruo);
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("No se ha encontrado el fichero");
+        } catch (IOException e) {
+            System.out.println("Error de lectura");
+        } finally {
+            try {
+                if (entrada != null) {
+                    entrada.close();
+                }
+            } catch (IOException e) {
+                System.out.println("Error al cerrar el fichero");
+            }
+        }
     }
 
     /**
@@ -67,8 +154,36 @@ public class Motor {
      * @param ficheroTrampas
      */
     private void cargarTrampas(String ficheroTrampas) {
-
+        BufferedReader entrada = null;
+        try {
+            entrada = new BufferedReader(new FileReader(ficheroTrampas));
+            String linea;
+            while ((linea = entrada.readLine()) != null) {
+                String[] partes = linea.split(";");
+                int fila = Integer.parseInt(partes[0]);
+                if (fila > 0) fila--;
+                int columna = Integer.parseInt(partes[1]);
+                if (columna > 0) columna--;
+                String descripcion = partes[2];
+                int dano = Integer.parseInt(partes[3]);
+                Trampa trampa = new Trampa(descripcion, dano);
+                mapa[fila][columna].agregarTrampa(trampa);
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("No se ha encontrado el fichero");
+        } catch (IOException e) {
+            System.out.println("Error de lectura");
+        } finally {
+            try {
+                if (entrada != null) {
+                    entrada.close();
+                }
+            } catch (IOException e) {
+                System.out.println("Error al cerrar el fichero");
+            }
+        }
     }
+
 
     /**
      * Metodo iniciar, para preparar el mapa
@@ -79,8 +194,12 @@ public class Motor {
      * @param ficheroTrampas
      */
     public void iniciar(String ficheroMapa, String ficheroItems, String ficheroMonstruos, String ficheroTrampas) {
-
+        cargarMapa(ficheroMapa);
+        cargarItems(ficheroItems);
+        cargarMonstruos(ficheroMonstruos);
+        cargarTrampas(ficheroTrampas);
     }
+
 
     /**
      * Método getSala para obtener una sala concreta del mapa
@@ -90,13 +209,7 @@ public class Motor {
      * @return
      */
     public Sala getSala(int fila, int columna) {
-        Sala sala = null;
-        for (int i = 0; i < ; i++){
-            for (int j = 0; j < ; j++){
-
-            }
-        }
-        return sala;
+        return mapa[fila][columna];
     }
 
     /**
@@ -107,38 +220,41 @@ public class Motor {
      * @param columna
      * @return
      */
+
+    //falta metodo
+    private boolean existeSala(int fila, int columna) {
+        return mapa[fila][columna] != null;
+    }
     public String mostrarMapa(int fila, int columna) {
-        int filas = mapa.length;
-        int columnas = mapa[0].length;
-        String informacion = "";
+        int filasMapa = mapa.length;
+        int columnasMapa = mapa[0].length;
+        String a = "";
 
-        informacion += "¬";
-        for (int i = 0; i < columnas; i++){
-            informacion += "=";
+        a += "╔";
+        for (int i = 0; i < columnasMapa; i++) {
+            a += "═";
         }
-        informacion += "¬\n";
-
-        for (int i = 0; i < filas; i++){
-            informacion += "||";
-            for (int j = 0; j < columnas; j++){
-                if (i == fila && j == columna){
-                    informacion += "@";
-                } else if (mapa[i][j] != null) {
-                    informacion += " ";
+        a += "╗\n";
+        for (int i = 0; i < filasMapa; i++) {
+            a += "║";
+            for (int j = 0; j < columnasMapa; j++) {
+                if(i == fila && j== columna){
+                    a += "@"; //posicion del personaje
+                }else if (existeSala(i, j)) {
+                    a += "░";
                 } else {
-                    informacion += " ";
+                    a += " ";
                 }
             }
-            informacion += "||\n";
+            a += "║\n";
         }
-
-        informacion += "¬";
-        for (int i = 0; i < columnas; i++){
-            informacion += "=";
+        a += "╚";
+        for (int i = 0; i < columnasMapa; i++) {
+            a += "═";
         }
-        informacion += "¬\n";
-
-        return informacion;
+        a += "╝\n";
+        return a;
+    }
 }
 
     /**
@@ -162,14 +278,52 @@ public class Motor {
      * @param random
      */
     public void jugar(Scanner teclado, Personaje personaje, Random random) {
-        System.out.println(mapa);
-        Sala sala = null;
-        if (personaje.getVida() != 0 && posicion){
-            sala = personaje.getItems().
-        }
-        sala.toString();
-        if (sala.hayMonstruos()){
+        boolean salir = false;
+        System.out.println(mostrarMapa(0,0));
+        Sala salaActual = mapa[0][0];
+        while (personaje.getVida()>0 && salaActual.getFila() != mapa.length-1 && salaActual.getColumna() != mapa[0].length-1 && !salir) {
+            System.out.println(salaActual.getDescripcion());
+            if(salaActual.hayMonstruos()){
+                Monstruo monstruo = salaActual.seleccionarMonstruo(teclado);
+                while(personaje.getVida()>0 && monstruo.getVida()>0){
+                    monstruo.recibirDanyo(personaje.getAtaque());
+                    if(monstruo.getVida()>0){
+                        personaje.recibirDanyo(monstruo.getAtaque());
+                    }
+                    if (personaje.getVida() <= 0) {
+                        System.out.println("El mounstro te ha eliminado, fin del juego");
+                        salir = true;
+                    }
+                }
+            }
 
+            if(salaActual.hayTrampas()){
+                for (int i = 0; i < salaActual.getTrampas().length; i++) {
+                    if(salaActual.getTrampas()[i] != null){
+                        if(random.nextInt(50) < personaje.getDestreza()){
+                            System.out.println("Has esquivado la trampa");
+                        }else{
+                            personaje.recibirDanyo(salaActual.getTrampas()[i].getDanyo());
+                            if (personaje.getVida() <= 0) {
+                                System.out.println("Has caido en una trampa y no has sobrevivido, fin del juego");
+                                salir = true;
+                            }
+                        }
+                    }
+                }
+            }
+            if(salaActual.hayItems()){
+                Item item = salaActual.seleccionarItem(teclado);
+                while(item != null){
+                    if(personaje.anyadirItem(item)){
+                        System.out.println("Has añadido el item a tu mochila");
+                    }else{
+                        System.out.println("No puedes añadir el item a tu mochila");
+                    }
+                    item = salaActual.seleccionarItem(teclado);
+                }
+            }
+            seleccionarMovimiento(teclado, salaActual);
         }
     }
 
@@ -184,7 +338,64 @@ public class Motor {
      * @return
      */
     public Sala seleccionarMovimiento(Scanner teclado, Sala salaActual) {
+        Sala nuevaSala;
+        do {
+            System.out.println("Introduce el movimiento (N, E, S, O):");
+            String movimiento = teclado.nextLine();
+            switch (movimiento) {
+                case "N":
+                    if (salaActual.getFila() == 0) {
+                        System.out.println("No puedes moverte al norte");
+                        nuevaSala = salaActual;
+                    } else if(!existeSala(salaActual.getFila(), salaActual.getColumna())){
+                        System.out.println("No puedes moverte al norte");
+                        nuevaSala = salaActual;
+                    } else {
+                        nuevaSala = mapa[salaActual.getFila() - 1][salaActual.getColumna()];
+                    }
 
-        return
+                    break;
+                case "S":
+                    if (salaActual.getFila() == mapa.length - 1) {
+                        System.out.println("No puedes moverte al sur");
+                        nuevaSala = salaActual;
+                    }else if(!existeSala(salaActual.getFila(), salaActual.getColumna())){
+                        System.out.println("No puedes moverte al sur");
+                        nuevaSala = salaActual;
+                    }
+                    else {
+                        nuevaSala = mapa[salaActual.getFila() + 1][salaActual.getColumna()];
+                    }
+                    break;
+                case "E":
+                    if (salaActual.getColumna() == mapa[0].length - 1) {
+                        System.out.println("No puedes moverte al este");
+                        nuevaSala = salaActual;
+                    } else if(!existeSala(salaActual.getFila(), salaActual.getColumna())){
+                        System.out.println("No puedes moverte al este");
+                        nuevaSala = salaActual;
+                    }
+                    else {
+                        nuevaSala = mapa[salaActual.getFila()][salaActual.getColumna() + 1];
+                    }
+                    break;
+                case "O":
+                    if (salaActual.getColumna() == 0) {
+                        System.out.println("No puedes moverte al oeste");
+                        nuevaSala = salaActual;
+                    } else if(!existeSala(salaActual.getFila(), salaActual.getColumna())){
+                        System.out.println("No puedes moverte al oeste");
+                        nuevaSala = salaActual;
+                    }
+                    else {
+                        nuevaSala = mapa[salaActual.getFila()][salaActual.getColumna() - 1];
+                    }
+                    break;
+                default:
+                    System.out.println("Movimiento no válido. Comprueba que hayas introducido N, E, S o O");
+                    nuevaSala = salaActual;
+            }
+        } while (nuevaSala == salaActual);
+        return nuevaSala;
     }
-}
+
