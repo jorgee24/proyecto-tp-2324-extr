@@ -1,5 +1,4 @@
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.time.LocalDate;
 import java.util.Random;
 import java.util.Scanner;
@@ -43,7 +42,23 @@ public class Aventuras {
      * @param jugador
      */
     private static void guardarPuntuacion(String ficheroPuntuaciones, Personaje jugador) {
-
+            BufferedWriter bw = null;
+            try {
+                bw = new BufferedWriter(new FileWriter(ficheroPuntuaciones, Personaje jugador));
+                bw.write("{ " + jugador.getNombre() + " (V: " + jugador.getVida() + ", A: " + jugador.getAtaque() + ", D: " + jugador.getDefensa() + ", X: " + jugador.getDestreza() + "} ," + jugador.getValorMochila() + " monedas");
+            } catch (IOException e){
+                System.out.println(e.getMessage());
+            } finally {
+                {
+                    try {
+                        if (bw != null){
+                            bw.close();
+                        }
+                    } catch (IOException e){
+                        System.out.println(e.getMessage());
+                    }
+                }
+            }
     }
 
     /**
