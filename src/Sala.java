@@ -40,16 +40,15 @@ public class Sala {
     public boolean agregarItem(Item item) {
         boolean resultado = false;
         int i = 0;
-        while (i < items.length && !items.lleno){
-            i++;
-            if (item != items[i]){
+        while (i < items.length && !resultado && !items[i].equals(item)){
+            if (items[i] == null){
+                items[i] = item;
                 resultado = true;
+            } else {
+                i++;
             }
         }
-
-        items.length++;
-        items[i+1] = item;
-
+        return resultado;
     }
 
     /**
@@ -62,15 +61,13 @@ public class Sala {
     public boolean agregarMonstruo(Monstruo monstruo) {
         boolean resultado = false;
         int i = 0;
-        while (i < monstruos.length){
-            if (monstruo != monstruos[i]){
+        while (i < monstruos.length && !resultado && !monstruos[i].equals(monstruo)){
+            if (monstruos[i] == null){
+                monstruos[i] = monstruo;
                 resultado = true;
+            }else {
+                i++;
             }
-            i++;
-        }
-        if (monstruos[i] != monstruo){
-            monstruos++;
-            monstruos[i+1] = monstruo;
         }
         return resultado;
     }
@@ -85,15 +82,13 @@ public class Sala {
     public boolean agregarTrampa(Trampa trampa) {
         boolean resultado = false;
         int i = 0;
-        while (i < trampas.length){
-            i++;
-            if (trampas[i] != trampa){
+        while (i < trampas.length && !trampas[i].equals(trampa) && !resultado){
+            if (trampas[i] == null){
+                trampas[i] = trampa;
                 resultado = true;
+            } else {
+                i++;
             }
-        }
-        if (trampas[i] != trampa){
-            trampas++;
-            trampas[i + 1] = trampa;
         }
         return resultado;
     }
@@ -113,7 +108,7 @@ public class Sala {
      */
     public boolean hayMonstruos() {
         boolean resultado = false;
-        for (int i = 0; i < monstruos.length; i++){
+        for (int i = 0; i < monstruos.length && !resultado; i++){
             if (monstruos[i] != null){
                 resultado = true;
             }
@@ -129,18 +124,29 @@ public class Sala {
      * @return
      */
     public Monstruo seleccionarMonstruo(Scanner teclado) {
-        Monstruo resultado = null;
+        String monstruo;
+        listarMonstruos();
+        do {
+            System.out.println("Introduzca el nombre del monstruo que quiere seleccionar: ");
+            monstruo = teclado.nextLine();
+        }while (!contieneMonstruo(monstruo));
+        Monstruo resul = null;
+
         for (int i = 0; i < monstruos.length; i++){
-            System.out.println(monstruos[i].toString());
-        }
-        System.out.println("¿Que monstruo desea seleccionar?");
-        String resultado1 = teclado.next();
-        for (int i = 0; i < monstruos.length; i++){
-            if (monstruos[i].getNombre() == resultado1){
-                resultado = monstruos[i];
+            if (monstruos[i].getNombre() == monstruo){
+                resul = monstruos[i];
             }
         }
-        return resultado;
+        return resul;
+    }
+    private boolean contieneMonstruo(String nombreMonstruo){
+        boolean resul = false;
+        for (int i = 0; i < monstruos.length; i++){
+            if (monstruos[i].getNombre() == nombreMonstruo){
+                resul = true;
+            }
+        }
+        return resul;
     }
 
     /**
@@ -165,7 +171,7 @@ public class Sala {
      */
     private void listarMonstruos() {
         for (int i = 0; i < monstruos.length; i++){
-            monstruos[i].toString();
+            System.out.println(monstruos[i].toString());
         }
     }
 
