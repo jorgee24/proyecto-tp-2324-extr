@@ -34,6 +34,7 @@ public class Aventuras {
         guardarPuntuacion(args[9], personaje);
         mostrarPuntuaciones(args[9]);
 
+        }
     /**
      * Metodo guardarPuntuación en fichero
      * TODO abrir y guardar en el fichero pasado como parametro el personaje
@@ -44,7 +45,7 @@ public class Aventuras {
     private static void guardarPuntuacion(String ficheroPuntuaciones, Personaje jugador) {
             BufferedWriter bw = null;
             try {
-                bw = new BufferedWriter(new FileWriter(ficheroPuntuaciones, Personaje jugador));
+                bw = new BufferedWriter(new FileWriter(String ficheroPuntuaciones, Personaje jugador));
                 bw.write("{ " + jugador.getNombre() + " (V: " + jugador.getVida() + ", A: " + jugador.getAtaque() + ", D: " + jugador.getDefensa() + ", X: " + jugador.getDestreza() + "} ," + jugador.getValorMochila() + " monedas");
             } catch (IOException e){
                 System.out.println(e.getMessage());
@@ -88,4 +89,3 @@ public class Aventuras {
             }
         }
     }
-}
