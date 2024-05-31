@@ -140,7 +140,7 @@ public class Sala {
         Monstruo resul = null;
 
         boolean encontrado = false;
-        for (int i = 0; i < monstruos.length; i++){
+        for (int i = 0; i < monstruos.length && encontrado; i++){
             if (monstruos[i].getNombre().equalsIgnoreCase(monstruo)){
                 resul = monstruos[i];
                 encontrado = true;
