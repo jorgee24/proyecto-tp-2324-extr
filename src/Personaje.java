@@ -46,8 +46,14 @@ public class Personaje {
         int defensa = Utilidades.leerNumero(teclado, "Puntos de defensa del personaje: ", 1, 250 - ataque);
         int destreza = Utilidades.leerNumero(teclado, "Puntos de destreza: ", 1, 250 - defensa);
         int maxPesoPorPersonaje = ataque/2;
-        Item items = destreza/4;
-        Personaje personaje = new Personaje(nombre, vida, ataque, defensa, destreza, maxPesoPorPersonaje, items);
+        if(maxPesoPorPersonaje < 1){
+            maxPesoPorPersonaje = 1;
+        }
+        int maxItemsPorPersonaje = destreza/4;
+        if(maxItemsPorPersonaje < 1){
+            maxItemsPorPersonaje = 1;
+        }
+        Personaje personaje = new Personaje(nombre, vida, ataque, defensa, destreza, maxPesoPorPersonaje, maxItemsPorPersonaje);
 
 
     }
