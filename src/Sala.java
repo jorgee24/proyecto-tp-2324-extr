@@ -361,12 +361,19 @@ public class Sala {
      * @param descripcion
      */
     public void eliminarItem(String descripcion) {
-        for (int i = 0; i < items.length; i++){
-            if (items[i].getDescripcion().equalsIgnoreCase(descripcion) && items[i] != null){
-                if (items[i +1] != null){
-                    items[i] = items[i + 1];
+        boolean encontrado = false;
+        int contador = 0;
+        int numItems = items.length;
+        while (contador < numItems && !encontrado){
+            if (items[contador].getDescripcion().equalsIgnoreCase(descripcion)){
+                while (contador < numItems - 1){
+                    items[contador] = items[ contador + 1];
+                    contador++;
                 }
+                items[numItems - 1] = null;
+                encontrado = true;
             }
+            contador++;
         }
     }
 }
