@@ -157,9 +157,11 @@ public class Sala {
      */
     public Monstruo buscarMonstruo(String nombreMonstruo) {
         Monstruo resultado = null;
-        for (int i = 0; i < monstruos.length; i++){
-            if (monstruos[i].getNombre() == nombreMonstruo){
+        boolean encontrado = false;
+        for (int i = 0; i < monstruos.length && !encontrado; i++){
+            if (monstruos[i].getNombre().equalsIgnoreCase(nombreMonstruo)){
                 resultado = monstruos[i];
+                encontrado = true;
             }
         }
         return resultado;
