@@ -306,6 +306,8 @@ public class Motor {
                     monstruo.recibirDanyo(personaje.getAtaque());
                     if (monstruo.getVida() > 0) {
                         personaje.recibirDanyo(monstruo.getAtaque());
+                    } else {
+                        salaActual.eliminarMonstruo(monstruo.getNombre());
                     }
                     if (personaje.getVida() <= 0) {
                         System.out.println("El mounstro te ha eliminado, fin del juego");
