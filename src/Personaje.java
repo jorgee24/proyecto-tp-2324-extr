@@ -43,9 +43,9 @@ public class Personaje {
         String nombre = Utilidades.leerCadena(teclado, "¿Cómo te llamas? ");
         System.out.println("¡Hola, " + nombre + "! Tienes 250 puntos para repartir entre vida, ataque, defensa y destreza.");
         int vida = Utilidades.leerNumero(teclado, "¿Cuánta vida quieres tener? (50-247): ", 50, 247);
-        int ataque = Utilidades.leerNumero(teclado,"¿Cuánto ataque quieres tener? (1-%d): ", 1, 250-vida);
-        int defensa = Utilidades.leerNumero(teclado, "¿Cuánta defensa quieres tener? (1-%d): ", 1, 250 - ataque);
-        int destreza = Utilidades.leerNumero(teclado, "¿Cuánta destreza quieres tener? (1-%d): ", 1, 250 - defensa);
+        int ataque = Utilidades.leerNumero(teclado,"¿Cuánto ataque quieres tener?: ", 1, 250-vida);
+        int defensa = Utilidades.leerNumero(teclado, "¿Cuánta defensa quieres tener?: ", 1, 250 - ataque);
+        int destreza = Utilidades.leerNumero(teclado, "¿Cuánta destreza quieres tener?: ", 1, 250 - defensa);
 
         int maxPesoPorPersonaje;
         if (ataque/2 < 1){
