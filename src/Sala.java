@@ -128,24 +128,19 @@ public class Sala {
      * @return
      */
     public Monstruo seleccionarMonstruo(Scanner teclado) {
-        String monstruo;
-        listarMonstruos();
-        do {
-            System.out.println("Introduzca el nombre del monstruo que quiere seleccionar: ");
-            monstruo = teclado.nextLine();
-        }while (!contieneMonstruo(monstruo));
-        Monstruo resul = null;
-
-        boolean encontrado = false;
-        for (int i = 0; i < monstruos.length && !encontrado; i++){
-            if (monstruos[i] != null){
-                if (monstruos[i].getNombre().equalsIgnoreCase(monstruo)){
-                    resul = monstruos[i];
+        if (hayMonstruos()){
+            listarMonstruos();
+            boolean encontrado = false;
+            String nombre = "";
+            while (!encontrado) {
+                nombre = Utilidades.leerCadena(teclado, "Escribe el nombre del monstruo que quieres atacar: ");
+                if (buscarMonstruo(nombre) != null) {
                     encontrado = true;
                 }
             }
+            return buscarMonstruo(nombre);
         }
-        return resul;
+        else return null;
     }
     private boolean contieneMonstruo(String nombreMonstruo){
         boolean resul = false;
@@ -158,7 +153,6 @@ public class Sala {
         }
         return resul;
     }
-
     /**
      * Método buscarMonstruo para buscar un monstruo dado el nombre del mismo
      * TODO devolver el monstruo según el nombre pasado como parámetro o devolver null si no se encuentra
@@ -317,27 +311,22 @@ public class Sala {
      * @return
      */
     public Item seleccionarItem(Scanner teclado) {
-        String item;
-        listarItems();
-        boolean encontrado = false;
-        Item resul = null;
-        do {
-            System.out.println("Introduzca el nombre del item que quiere seleccionar: ");
-            item = teclado.nextLine();
-            for (int i = 0; i < items.length && !encontrado; i++){
-                if (items[i] != null){
-                    if (items[i].getDescripcion().equalsIgnoreCase(item)){
-                        resul = items[i];
-                        encontrado = true;
-                    }
+        if (hayItems()){
+            listarItems();
+            boolean encontrado = false;
+            String nombre = "";
+            while (!encontrado) {
+                nombre = Utilidades.leerCadena(teclado, "Escriba la descripcion del item que quieres coger(NINGUNO para cancelar): ");
+                if (buscarItem(nombre) != null) {
+                    encontrado = true;
+                }
+                if (nombre.equals("NINGUNO")){
+                    encontrado=true;
                 }
             }
-        }while (!contieneItem(item) && !encontrado);
-
-        /*if (encontrado){
-            System.out.println("No hay mas items");
-        }*/
-        return resul;
+            return buscarItem(nombre);
+        }
+        else return null;
     }
     private boolean contieneItem(String nombreItem){
         boolean resul = false;
