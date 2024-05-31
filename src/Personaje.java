@@ -40,21 +40,32 @@ public class Personaje {
      * @return
      */
     public static Personaje crearPersonaje(Scanner teclado) {
-        String nombre = Utilidades.leerCadena(teclado, "Introduzca un nombre: ");
-        int vida = Utilidades.leerNumero(teclado, "Introduzca numero de vidas: ", 50, 247);
-        int ataque = Utilidades.leerNumero(teclado,"Puntos de ataque del personaje: ", 1, 250-vida);
-        int defensa = Utilidades.leerNumero(teclado, "Puntos de defensa del personaje: ", 1, 250 - ataque);
-        int destreza = Utilidades.leerNumero(teclado, "Puntos de destreza: ", 1, 250 - defensa);
-        int maxPesoPorPersonaje = ataque/2;
-        if(maxPesoPorPersonaje < 1){
+        String nombre = Utilidades.leerCadena(teclado, "¿Cómo te llamas? ");
+        System.out.println("¡Hola, " + nombre + "! Tienes 250 puntos para repartir entre vida, ataque, defensa y destreza.");
+        int vida = Utilidades.leerNumero(teclado, "¿Cuánta vida quieres tener? (50-247): ", 50, 247);
+        int ataque = Utilidades.leerNumero(teclado,"¿Cuánto ataque quieres tener? (1-%d): ", 1, 250-vida);
+        int defensa = Utilidades.leerNumero(teclado, "¿Cuánta defensa quieres tener? (1-%d): ", 1, 250 - ataque);
+        int destreza = Utilidades.leerNumero(teclado, "¿Cuánta destreza quieres tener? (1-%d): ", 1, 250 - defensa);
+
+        double maxPesoPorPersonaje;
+        if (ataque/2 < 1){
             maxPesoPorPersonaje = 1;
+        } else {
+            maxPesoPorPersonaje = (double) ataque/2;
         }
-        int maxItemsPorPersonaje = destreza/4;
-        if(maxItemsPorPersonaje < 1){
+
+        int maxItemsPorPersonaje;
+        if (destreza/4 < 1){
             maxItemsPorPersonaje = 1;
+        } else {
+            maxItemsPorPersonaje = destreza/4;
         }
+
+        System.out.println();
+
         Personaje personaje = new Personaje(nombre, vida, ataque, defensa, destreza, maxPesoPorPersonaje, maxItemsPorPersonaje);
         return personaje;
+
     }
 
     /**
