@@ -333,9 +333,10 @@ public class Sala {
                 }
             }
         }while (!contieneItem(item) && !encontrado);
-        if (encontrado){
+
+        /*if (encontrado){
             System.out.println("No hay mas items");
-        }
+        }*/
         return resul;
     }
     private boolean contieneItem(String nombreItem){
