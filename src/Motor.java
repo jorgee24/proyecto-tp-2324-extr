@@ -170,8 +170,8 @@ public class Motor {
                 int columna = Integer.parseInt(partes[1]);
                 if (columna > 0) columna--;
                 String descripcion = partes[2];
-                int dano = Integer.parseInt(partes[3]);
-                Trampa trampa = new Trampa(descripcion, dano);
+                int danio = Integer.parseInt(partes[3]);
+                Trampa trampa = new Trampa(descripcion, danio);
                 mapa[fila][columna].agregarTrampa(trampa);
             }
         } catch (FileNotFoundException e) {
