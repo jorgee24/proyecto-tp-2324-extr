@@ -278,7 +278,7 @@ public class Motor {
      * @param random
      */
     public void jugar(Scanner teclado, Personaje personaje, Random random) {
-        boolean salir = false;
+        /*boolean salir = false;
         System.out.println(mostrarMapa(0, 0));
         Sala salaActual = mapa[0][0];
         while (personaje.getVida() > 0 && salaActual.getFila() != mapa.length - 1 && salaActual.getColumna() != mapa[0].length - 1 && !salir) {
@@ -326,6 +326,62 @@ public class Motor {
                 }
             }
             seleccionarMovimiento(teclado, salaActual);
+        }*/
+        boolean salir = false;
+        System.out.println(mostrarMapa(0,0));
+        Sala salaActual = mapa[0][0];
+        while (personaje.getVida()>0 && salaActual.getFila() != mapa.length-1 && salaActual.getColumna() != mapa[0].length-1 && !salir) {
+            System.out.println(salaActual.getDescripcion());
+            if(salaActual.hayMonstruos()){
+                Monstruo monstruo = salaActual.seleccionarMonstruo(teclado);
+                while(personaje.getVida()>0 && monstruo.getVida()>0){
+                    System.out.format("{ %s ataca a %s con %d puntos de daño\n", personaje.toString(), monstruo.toString(), personaje.getAtaque());
+                    monstruo.recibirDanyo(personaje.getAtaque());
+                    if(monstruo.getVida()>0){
+                        System.out.format("{ %s ataca a %s con %d puntos de daño\n", monstruo.toString(), personaje.toString(), personaje.getAtaque());
+                        personaje.recibirDanyo(monstruo.getAtaque());
+                    }
+                    else{
+                        salaActual.eliminarMonstruo(monstruo.getNombre());
+                        System.out.println("¡Has derrotado al monstruo!");
+                    }
+                    if (personaje.getVida() <= 0) {
+                        System.out.println("El mounstro te ha eliminado, fin del juego");
+                        salir = true;
+                    }
+                }
+            }
+            if(salaActual.hayTrampas()){
+                for (int i = 0; i < salaActual.getTrampas().length; i++) {
+                    if(salaActual.getTrampas()[i] != null){
+                        if(random.nextInt(50) < personaje.getDestreza()){
+                            System.out.println("¡Has esquivado la trampa!"+salaActual.getTrampas()[i].getDescripcion());
+                        }else{
+                            personaje.recibirDanyo(salaActual.getTrampas()[i].getDanyo());
+                            System.out.println("¡Has caido en la trampa!"+salaActual.getTrampas()[i].getDescripcion());
+                            System.out.format("Te ha hecho %d puntos de daño\n",salaActual.getTrampas()[i].getDanyo());
+                            if (personaje.getVida() <= 0) {
+                                System.out.println("Has caido en una trampa y no has sobrevivido, fin del juego");
+                                salir = true;
+                            }
+                        }
+                    }
+                }
+            }
+            if(salaActual.hayItems()){
+                Item item = salaActual.seleccionarItem(teclado);
+                while(item != null){
+                    if(personaje.anyadirItem(item)){
+                        System.out.println("¡Te guardas el objeto!"+ item.toString());
+                        personaje.infoMochila();
+                        salaActual.eliminarItem(item.getDescripcion());
+                    }else{
+                        System.out.println("No puedes añadir el item a tu mochila");
+                    }
+                    item = salaActual.seleccionarItem(teclado);
+                }
+            }
+            salaActual = seleccionarMovimiento(teclado, salaActual);
         }
     }
 
@@ -341,62 +397,53 @@ public class Motor {
      * @return
      */
     public Sala seleccionarMovimiento(Scanner teclado, Sala salaActual) {
-        Sala nuevaSala;
+        Sala sala = salaActual;
+        boolean enSala = false;
+
         do {
+            System.out.println(mostrarMapa(sala.getFila(), sala.getColumna()));
             System.out.println("Introduce el movimiento (N, E, S, O):");
-            String movimiento = teclado.nextLine();
+            String movimiento = teclado.nextLine().toUpperCase();
+
             switch (movimiento) {
                 case "N":
-                    if (salaActual.getFila() == 0) {
-                        System.out.println("No puedes moverte al norte");
-                        nuevaSala = salaActual;
-                    } else if (!existeSala(salaActual.getFila(), salaActual.getColumna())) {
-                        System.out.println("No puedes moverte al norte");
-                        nuevaSala = salaActual;
+                    if (salaActual.getFila() > 0 && mapa[salaActual.getFila() - 1][salaActual.getColumna()] != null) {
+                        sala = mapa[salaActual.getFila() - 1][salaActual.getColumna()];
+                        enSala = true;
                     } else {
-                        nuevaSala = mapa[salaActual.getFila() - 1][salaActual.getColumna()];
+                        System.out.println("No puedes moverte al norte");
                     }
-
                     break;
                 case "S":
-                    if (salaActual.getFila() == mapa.length - 1) {
-                        System.out.println("No puedes moverte al sur");
-                        nuevaSala = salaActual;
-                    } else if (!existeSala(salaActual.getFila(), salaActual.getColumna())) {
-                        System.out.println("No puedes moverte al sur");
-                        nuevaSala = salaActual;
+                    if (salaActual.getFila() < mapa.length - 1 && mapa[salaActual.getFila() + 1][salaActual.getColumna()] != null) {
+                        sala = mapa[salaActual.getFila() + 1][salaActual.getColumna()];
+                        enSala = true;
                     } else {
-                        nuevaSala = mapa[salaActual.getFila() + 1][salaActual.getColumna()];
+                        System.out.println("No puedes moverte al sur");
                     }
                     break;
                 case "E":
-                    if (salaActual.getColumna() == mapa[0].length - 1) {
-                        System.out.println("No puedes moverte al este");
-                        nuevaSala = salaActual;
-                    } else if (!existeSala(salaActual.getFila(), salaActual.getColumna())) {
-                        System.out.println("No puedes moverte al este");
-                        nuevaSala = salaActual;
+                    if (salaActual.getColumna() < mapa[0].length - 1 && mapa[salaActual.getFila()][salaActual.getColumna() + 1] != null) {
+                        sala = mapa[salaActual.getFila()][salaActual.getColumna() + 1];
+                        enSala = true;
                     } else {
-                        nuevaSala = mapa[salaActual.getFila()][salaActual.getColumna() + 1];
+                        System.out.println("No puedes moverte al este");
                     }
                     break;
                 case "O":
-                    if (salaActual.getColumna() == 0) {
-                        System.out.println("No puedes moverte al oeste");
-                        nuevaSala = salaActual;
-                    } else if (!existeSala(salaActual.getFila(), salaActual.getColumna())) {
-                        System.out.println("No puedes moverte al oeste");
-                        nuevaSala = salaActual;
+                    if (salaActual.getColumna() > 0 && mapa[salaActual.getFila()][salaActual.getColumna() - 1] != null) {
+                        sala = mapa[salaActual.getFila()][salaActual.getColumna() - 1];
+                        enSala = true;
                     } else {
-                        nuevaSala = mapa[salaActual.getFila()][salaActual.getColumna() - 1];
+                        System.out.println("No puedes moverte al oeste");
                     }
                     break;
                 default:
-                    System.out.println("Movimiento no válido. Comprueba que hayas introducido N, E, S o O");
-                    nuevaSala = salaActual;
+                    System.out.println("Movimiento no válido. Comprueba que hayas introducido N, E, S u O");
             }
-        } while (nuevaSala == salaActual);
-        return nuevaSala;
+        } while (!enSala);
+
+        return sala;
     }
 }
 
