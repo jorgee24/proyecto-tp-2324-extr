@@ -249,7 +249,7 @@ public class Sala {
      */
     public boolean hayItems() {
         boolean resultado = false;
-        for (int i = 0; i < items.length && !resultado; i++){
+        for (int i = 0; i < items.length; i++){
             if (items[i] != null){
                 resultado = true;
             }
@@ -319,26 +319,34 @@ public class Sala {
     public Item seleccionarItem(Scanner teclado) {
         String item;
         listarItems();
+        boolean encontrado = false;
+        Item resul = null;
         do {
             System.out.println("Introduzca el nombre del item que quiere seleccionar: ");
             item = teclado.nextLine();
-        }while (!contieneItem(item));
-        Item resul = null;
-
-        boolean encontrado = false;
-        for (int i = 0; i < items.length && !encontrado; i++){
-            if (items[i].getDescripcion().equalsIgnoreCase(item)){
-                resul = items[i];
-                encontrado = true;
+            for (int i = 0; i < items.length && !encontrado; i++){
+                if (items[i] != null){
+                    if (items[i].getDescripcion().equalsIgnoreCase(item)){
+                        resul = items[i];
+                        encontrado = true;
+                    }
+                }
             }
+        }while (!contieneItem(item) && !encontrado);
+        if (encontrado){
+            System.out.println("No hay mas items");
         }
         return resul;
     }
     private boolean contieneItem(String nombreItem){
         boolean resul = false;
-        for (int i = 0; i < items.length; i++){
-            if (monstruos[i].getNombre().equalsIgnoreCase(nombreItem)){
-                resul = true;
+        if (!resul){
+            for (int i = 0; i < items.length; i++){
+                if (items[i] != null){
+                    if (items[i].getDescripcion().equalsIgnoreCase(nombreItem)){
+                        resul = true;
+                    }
+                }
             }
         }
         return resul;
@@ -352,7 +360,10 @@ public class Sala {
     private void listarItems() {
         if (hayItems()){
             for (int i = 0; i < items.length; i++){
-                System.out.println(items[i].toString());
+                if (items[i] != null){
+                    System.out.println(items[i].toString());
+                }
+
             }
         }
     }

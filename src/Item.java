@@ -50,7 +50,7 @@ public class Item {
      */
     @Override
     public String toString() {
-        String mensaje = "(Peso " + peso + ", Valor: " + valor + ")";
+        String mensaje = descripcion + "(Peso " + peso + ", Valor: " + valor + ")";
         return mensaje;
     }
 
