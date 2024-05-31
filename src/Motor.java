@@ -14,6 +14,7 @@ public class Motor {
 
     /**
      * Constructor Clase Motor
+     *
      * @param filas
      * @param columnas
      * @param maxItemsPorSala
@@ -32,6 +33,7 @@ public class Motor {
      * TODO leer los datos del fichero de mapa pasado por parametro y generar una matriz Sala[][]
      *  con dimension Sala[fila][columna] e inicializar la sala con los valores con la descripción del fichero
      *  y los parámetros de maxItemsPorSala, maxMonstruosPorSala, maxTrampasPorSala.
+     *
      * @param ficheroMapa
      * @return sala generada
      */
@@ -73,6 +75,7 @@ public class Motor {
      * Metodo cargarItems para agregar los items del fichero en el mapa
      * TODO Método para leer un fichero de items pasado por parámetro y según
      *  la fila y columna introducir el item en la sala.
+     *
      * @param ficheroItems
      */
     private void cargarItems(String ficheroItems) {
@@ -112,6 +115,7 @@ public class Motor {
      * Método cargarMonstruos para agregar los monstruos del fichero en el mapa
      * TODO Método para leer un fichero de Monstruos pasado por parámetro y según
      *  la fila y columna introducir el monstruo en la sala.
+     *
      * @param ficheroMonstruos
      */
     private void cargarMonstruos(String ficheroMonstruos) {
@@ -151,6 +155,7 @@ public class Motor {
      * Método cargarTrampas para agregar las trampas del fichero en el mapa
      * TODO Método para leer un fichero de trampas pasado por parámetro y según
      *   la fila y columna introducir la trampa en la sala.
+     *
      * @param ficheroTrampas
      */
     private void cargarTrampas(String ficheroTrampas) {
@@ -188,6 +193,7 @@ public class Motor {
     /**
      * Metodo iniciar, para preparar el mapa
      * TODO instanciación del parametro mapa y carga de datos con los ficheros pasados como parámetros
+     *
      * @param ficheroMapa
      * @param ficheroItems
      * @param ficheroMonstruos
@@ -204,6 +210,7 @@ public class Motor {
     /**
      * Método getSala para obtener una sala concreta del mapa
      * TODO devolver una Sala concreta del mapa
+     *
      * @param fila
      * @param columna
      * @return
@@ -216,15 +223,16 @@ public class Motor {
      * Método mostrarMapa para transformar el mapa en String
      * TODO construir un String con la información contenida en el mapa
      *  respetando el formato que aparece en la memoria de la práctica
+     *
      * @param fila
      * @param columna
      * @return
      */
 
-    //falta metodo
     private boolean existeSala(int fila, int columna) {
         return mapa[fila][columna] != null;
     }
+
     public String mostrarMapa(int fila, int columna) {
         int filasMapa = mapa.length;
         int columnasMapa = mapa[0].length;
@@ -238,9 +246,9 @@ public class Motor {
         for (int i = 0; i < filasMapa; i++) {
             a += "║";
             for (int j = 0; j < columnasMapa; j++) {
-                if(i == fila && j== columna){
-                    a += "@"; //posicion del personaje
-                }else if (existeSala(i, j)) {
+                if (i == fila && j == columna) {
+                    a += "@";
+                } else if (existeSala(i, j)) {
                     a += "░";
                 } else {
                     a += " ";
@@ -255,7 +263,7 @@ public class Motor {
         a += "╝\n";
         return a;
     }
-}
+
 
     /**
      * Método jugar para empezar a jugar con el personaje
@@ -273,21 +281,22 @@ public class Motor {
      *  5.c al igual que en combate hay que tener en cuenta si la vida del personaje lleva a 0
      *  6. Por último puede haber items en la sala, en cuyo caso habrá que preguntar al usuario qué ítems quiere guardarse (o NINGUNO para terminar)
      *  ¡IMPORTANTE! se debe mostrar por pantalla avisos para cada opción dando feedback al usuario de todo lo que ocurra (consultar enunciado)
+     *
      * @param teclado
      * @param personaje
      * @param random
      */
     public void jugar(Scanner teclado, Personaje personaje, Random random) {
         boolean salir = false;
-        System.out.println(mostrarMapa(0,0));
+        System.out.println(mostrarMapa(0, 0));
         Sala salaActual = mapa[0][0];
-        while (personaje.getVida()>0 && salaActual.getFila() != mapa.length-1 && salaActual.getColumna() != mapa[0].length-1 && !salir) {
+        while (personaje.getVida() > 0 && salaActual.getFila() != mapa.length - 1 && salaActual.getColumna() != mapa[0].length - 1 && !salir) {
             System.out.println(salaActual.getDescripcion());
-            if(salaActual.hayMonstruos()){
+            if (salaActual.hayMonstruos()) {
                 Monstruo monstruo = salaActual.seleccionarMonstruo(teclado);
-                while(personaje.getVida()>0 && monstruo.getVida()>0){
+                while (personaje.getVida() > 0 && monstruo.getVida() > 0) {
                     monstruo.recibirDanyo(personaje.getAtaque());
-                    if(monstruo.getVida()>0){
+                    if (monstruo.getVida() > 0) {
                         personaje.recibirDanyo(monstruo.getAtaque());
                     }
                     if (personaje.getVida() <= 0) {
@@ -297,12 +306,12 @@ public class Motor {
                 }
             }
 
-            if(salaActual.hayTrampas()){
+            if (salaActual.hayTrampas()) {
                 for (int i = 0; i < salaActual.getTrampas().length; i++) {
-                    if(salaActual.getTrampas()[i] != null){
-                        if(random.nextInt(50) < personaje.getDestreza()){
+                    if (salaActual.getTrampas()[i] != null) {
+                        if (random.nextInt(50) < personaje.getDestreza()) {
                             System.out.println("Has esquivado la trampa");
-                        }else{
+                        } else {
                             personaje.recibirDanyo(salaActual.getTrampas()[i].getDanyo());
                             if (personaje.getVida() <= 0) {
                                 System.out.println("Has caido en una trampa y no has sobrevivido, fin del juego");
@@ -312,12 +321,12 @@ public class Motor {
                     }
                 }
             }
-            if(salaActual.hayItems()){
+            if (salaActual.hayItems()) {
                 Item item = salaActual.seleccionarItem(teclado);
-                while(item != null){
-                    if(personaje.anyadirItem(item)){
+                while (item != null) {
+                    if (personaje.anyadirItem(item)) {
                         System.out.println("Has añadido el item a tu mochila");
-                    }else{
+                    } else {
                         System.out.println("No puedes añadir el item a tu mochila");
                     }
                     item = salaActual.seleccionarItem(teclado);
@@ -333,6 +342,7 @@ public class Motor {
      *  en este método hay que capturar por pantalla la acción que va a tomar el usuario de entre las posibles
      *  para ello hay que tener en cuenta que se debe avisar al usuario si puede realizar o no la acción.
      *  Se devolverá la sala destino a la que se ha movido el personaje.
+     *
      * @param teclado
      * @param salaActual
      * @return
@@ -347,7 +357,7 @@ public class Motor {
                     if (salaActual.getFila() == 0) {
                         System.out.println("No puedes moverte al norte");
                         nuevaSala = salaActual;
-                    } else if(!existeSala(salaActual.getFila(), salaActual.getColumna())){
+                    } else if (!existeSala(salaActual.getFila(), salaActual.getColumna())) {
                         System.out.println("No puedes moverte al norte");
                         nuevaSala = salaActual;
                     } else {
@@ -359,11 +369,10 @@ public class Motor {
                     if (salaActual.getFila() == mapa.length - 1) {
                         System.out.println("No puedes moverte al sur");
                         nuevaSala = salaActual;
-                    }else if(!existeSala(salaActual.getFila(), salaActual.getColumna())){
+                    } else if (!existeSala(salaActual.getFila(), salaActual.getColumna())) {
                         System.out.println("No puedes moverte al sur");
                         nuevaSala = salaActual;
-                    }
-                    else {
+                    } else {
                         nuevaSala = mapa[salaActual.getFila() + 1][salaActual.getColumna()];
                     }
                     break;
@@ -371,11 +380,10 @@ public class Motor {
                     if (salaActual.getColumna() == mapa[0].length - 1) {
                         System.out.println("No puedes moverte al este");
                         nuevaSala = salaActual;
-                    } else if(!existeSala(salaActual.getFila(), salaActual.getColumna())){
+                    } else if (!existeSala(salaActual.getFila(), salaActual.getColumna())) {
                         System.out.println("No puedes moverte al este");
                         nuevaSala = salaActual;
-                    }
-                    else {
+                    } else {
                         nuevaSala = mapa[salaActual.getFila()][salaActual.getColumna() + 1];
                     }
                     break;
@@ -383,11 +391,10 @@ public class Motor {
                     if (salaActual.getColumna() == 0) {
                         System.out.println("No puedes moverte al oeste");
                         nuevaSala = salaActual;
-                    } else if(!existeSala(salaActual.getFila(), salaActual.getColumna())){
+                    } else if (!existeSala(salaActual.getFila(), salaActual.getColumna())) {
                         System.out.println("No puedes moverte al oeste");
                         nuevaSala = salaActual;
-                    }
-                    else {
+                    } else {
                         nuevaSala = mapa[salaActual.getFila()][salaActual.getColumna() - 1];
                     }
                     break;
@@ -396,6 +403,8 @@ public class Motor {
                     nuevaSala = salaActual;
             }
         } while (nuevaSala == salaActual);
+
         return nuevaSala;
     }
+}
 
