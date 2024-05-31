@@ -45,10 +45,18 @@ public class Personaje {
     public static Personaje crearPersonaje(Scanner teclado) {
         String nombre = Utilidades.leerCadena(teclado, "¿Cómo te llamas? ");
         System.out.println("¡Hola, " + nombre + "! Tienes 250 puntos para repartir entre vida, ataque, defensa y destreza.");
+        int minimo = 50;
+        int maximo = 247;
         int vida = Utilidades.leerNumero(teclado, "¿Cuánta vida quieres tener? (50-247): ", 50, 247);
-        int ataque = Utilidades.leerNumero(teclado,"¿Cuánto ataque quieres tener?: ", 1, 250-vida);
-        int defensa = Utilidades.leerNumero(teclado, "¿Cuánta defensa quieres tener?: ", 1, 250 - ataque);
-        int destreza = Utilidades.leerNumero(teclado, "¿Cuánta destreza quieres tener?: ", 1, 250 - defensa);
+        int puntosRestantes = 250 - vida;
+        minimo = 1;
+        int ataque = Utilidades.leerNumero(teclado, "¿Cuánto ataque quieres tener? (" + minimo + "-" + (puntosRestantes - 2) + "):", 1, puntosRestantes - 2);
+        puntosRestantes -= ataque;
+
+        int defensa = Utilidades.leerNumero(teclado, "¿Cuánta defensa quieres tener? (" + minimo + "-" + (puntosRestantes - 1) + "):", 1, puntosRestantes - 1);
+        puntosRestantes -= defensa;
+
+        int destreza = Utilidades.leerNumero(teclado, "¿Cuánta destreza quieres tener? (" + minimo + "-" + puntosRestantes+ "):", 1, puntosRestantes);
 
         int maxPesoPorPersonaje;
         if (ataque/2 < 1){
