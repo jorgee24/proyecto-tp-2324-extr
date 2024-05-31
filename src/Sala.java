@@ -64,7 +64,7 @@ public class Sala {
         boolean resultado = false;
         boolean existe = false;
         for (int i = 0; i < monstruos.length; i++){
-            if (monstruos[i].equals(monstruo)){
+            if (monstruos[i] == monstruo){
                 existe = true;
             }
             if (monstruos[i] == null && !existe){
