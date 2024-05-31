@@ -47,8 +47,6 @@ public class Motor {
                 if (partes.length == 3) {
                     int filas = Integer.parseInt(partes[0]);
                     int columnas = Integer.parseInt(partes[1]);
-                    if (filas > 0) filas--;
-                    if (columnas > 0) columnas--;
                     String descripcion = partes[2];
                     Sala sala = new Sala(descripcion, maxItemsPorSala, maxMonstruosPorSala, maxTrampasPorSala, filas,
                             columnas);

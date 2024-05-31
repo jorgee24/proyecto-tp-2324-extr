@@ -11,6 +11,9 @@ public class Sala {
 
     private final int fila;
     private final int columna;
+    private int numeroItems;
+    private int numeroMonstruos;
+    private int numeroTrampas;
 
     /**
      * Constructor de clase para inicializar los atributos de clase
@@ -38,17 +41,15 @@ public class Sala {
      * @return
      */
     public boolean agregarItem(Item item) {
-        boolean resultado = false;
-        int i = 0;
-        if (items[i] != null){
-            while (i < items.length && !resultado && !items[i].equals(item)){
-                if (items[i] == null){
-                    items[i] = item;
-                    resultado = true;
-                } else {
-                    i++;
-                }
+        boolean resultado = true;
+        for (int i = 0; i < numeroItems; i++) {
+            if (items[i] == item) {
+                resultado = false;
             }
+        }
+        if (resultado) {
+            items[numeroItems] = item;
+            numeroItems++;
         }
         return resultado;
     }
@@ -61,17 +62,15 @@ public class Sala {
      * @return
      */
     public boolean agregarMonstruo(Monstruo monstruo) {
-        boolean resultado = false;
-        boolean existe = false;
-        for (int i = 0; i < monstruos.length; i++){
-            if (monstruos[i] == monstruo){
-                existe = true;
+        boolean resultado = true;
+        for (int i = 0; i < numeroMonstruos; i++) {
+            if (monstruos[i] == monstruo) {
+                resultado = false;
             }
-            if (monstruos[i] == null && !existe){
-                monstruos[i] = monstruo;
-                resultado = true;
-                existe = true;
-            }
+        }
+        if (resultado) {
+            monstruos[numeroMonstruos] = monstruo;
+            numeroMonstruos++;
         }
         return resultado;
     }
@@ -85,17 +84,15 @@ public class Sala {
      * @return
      */
     public boolean agregarTrampa(Trampa trampa) {
-        boolean resultado = false;
-        boolean existe = false;
-        for (int i = 0; i < trampas.length; i++){
-            if (trampas[i] == trampa){
-                existe = true;
+        boolean resultado = true;
+        for (int i = 0; i < numeroTrampas; i++) {
+            if (trampas[i] == trampa) {
+                resultado = false;
             }
-            if (trampas[i] == null && !existe){
-                trampas[i] = trampa;
-                resultado = true;
-                existe = true;
-            }
+        }
+        if (resultado) {
+            trampas[numeroTrampas] = trampa;
+            numeroTrampas++;
         }
         return resultado;
     }
