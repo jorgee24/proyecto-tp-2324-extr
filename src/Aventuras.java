@@ -70,6 +70,22 @@ public class Aventuras {
      * @param ficheroPuntuaciones
      */
     private static void mostrarPuntuaciones(String ficheroPuntuaciones) {
-
+        Scanner scanner = null;
+            System.out.println("Puntuaciones: ");
+            try {
+                scanner = new Scanner(new java.io.File(ficheroPuntuaciones));
+                while (scanner.hasNextLine()){
+                    System.out.println(scanner.nextLine());
+                }
+            } catch (Exception e){
+                System.out.println(e.getMessage());
+            } finally {
+                {
+                    if (scanner != null){
+                        scanner.close();
+                    }
+                }
+            }
+        }
     }
 }
