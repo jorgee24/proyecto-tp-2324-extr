@@ -47,11 +47,11 @@ public class Personaje {
         int defensa = Utilidades.leerNumero(teclado, "¿Cuánta defensa quieres tener? (1-%d): ", 1, 250 - ataque);
         int destreza = Utilidades.leerNumero(teclado, "¿Cuánta destreza quieres tener? (1-%d): ", 1, 250 - defensa);
 
-        double maxPesoPorPersonaje;
+        int maxPesoPorPersonaje;
         if (ataque/2 < 1){
             maxPesoPorPersonaje = 1;
         } else {
-            maxPesoPorPersonaje = (double) ataque/2;
+            maxPesoPorPersonaje = (int) ataque/2;
         }
 
         int maxItemsPorPersonaje;
