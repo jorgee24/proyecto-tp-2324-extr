@@ -85,25 +85,18 @@ public class Sala {
      * @return
      */
     public boolean agregarTrampa(Trampa trampa) {
-        boolean resultado = false, lleno= true, igual =false;
-        int i = 0, vacio =0;
-        while (i < trampas.length && !resultado ){
-            if(trampas[i]!=trampa){
-                i++;
-                igual=true;
-            }else{
-                vacio=i;
+        boolean resultado = false;
+        boolean existe = false;
+        for (int i = 0; i < trampas.length; i++){
+            if (trampas[i] == trampa){
+                existe = true;
             }
-            if (trampas[i] == null && lleno == true){
-                lleno =false;
+            if (trampas[i] == null && !existe){
+                trampas[i] = trampa;
+                resultado = true;
+                existe = true;
             }
         }
-        if(lleno || igual){
-            resultado =false;
-        }else{
-            trampas[vacio]=trampa;
-        }
-
         return resultado;
     }
 
