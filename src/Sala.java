@@ -144,7 +144,7 @@ public class Sala {
     private boolean contieneMonstruo(String nombreMonstruo){
         boolean resul = false;
         for (int i = 0; i < monstruos.length; i++){
-            if (monstruos[i].getNombre().equalsIgnoreCase(monstruos)){
+            if (monstruos[i].getNombre().equalsIgnoreCase(nombreMonstruo)){
                 resul = true;
             }
         }
