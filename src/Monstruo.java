@@ -85,10 +85,13 @@ public class Monstruo {
      */
     @Override
     public boolean equals(Object obj) {
-        boolean resultado = false;
-        if (obj.equals(vida) && obj.equals(nombre) && obj.equals(ataque) && obj.equals(defensa)){
-            resultado = true;
+        if(this == obj){
+            return  true;
         }
-        return resultado;
+        if (obj == null||getClass()!=obj.getClass()){
+            return false;
+        }
+        Monstruo monstruo= (Monstruo) obj;
+        return monstruo.getNombre().equals(nombre) && monstruo.getAtaque() == ataque && monstruo.getVida() == vida && monstruo.getDefensa() == defensa;
     }
 }

@@ -63,10 +63,13 @@ public class Item {
      */
     @Override
     public boolean equals(Object obj) {
-        boolean resultado = false;
-        if (obj.equals(peso) && obj.equals(valor) && obj.equals(descripcion)){
-            resultado = true;
+        if(this == obj){
+            return  true;
         }
-        return resultado;
+        if (obj == null||getClass()!=obj.getClass()){
+            return false;
+        }
+        Item item= (Item) obj;
+        return item.getDescripcion().equals(descripcion) && item.getPeso() == peso && item.getValor() == valor;
     }
 }
