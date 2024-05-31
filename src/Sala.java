@@ -132,9 +132,11 @@ public class Sala {
         }while (!contieneMonstruo(monstruo));
         Monstruo resul = null;
 
+        boolean encontrado = false;
         for (int i = 0; i < monstruos.length; i++){
-            if (monstruos[i].getNombre() == monstruo){
+            if (monstruos[i].getNombre().equalsIgnoreCase(monstruo)){
                 resul = monstruos[i];
+                encontrado = true;
             }
         }
         return resul;
@@ -142,7 +144,7 @@ public class Sala {
     private boolean contieneMonstruo(String nombreMonstruo){
         boolean resul = false;
         for (int i = 0; i < monstruos.length; i++){
-            if (monstruos[i].getNombre() == nombreMonstruo){
+            if (monstruos[i].getNombre().equalsIgnoreCase(monstruos)){
                 resul = true;
             }
         }
@@ -184,9 +186,11 @@ public class Sala {
      */
     public void eliminarMonstruo(String nombreMonstruo) {
         for (int i = 0; i < monstruos.length; i++){
-            if (monstruos[i].getNombre() == nombreMonstruo){
-                monstruos[i + 1] = monstruos[i];
-                monstruos.length--;
+            if (monstruos[i].getNombre().equalsIgnoreCase(nombreMonstruo) && monstruos[i] != null){
+                if (monstruos[i + 1] != null){
+                    monstruos[i] = monstruos[i + 1];
+                    //eliminar numMonstruos?
+                }
             }
         }
     }
@@ -198,7 +202,7 @@ public class Sala {
      */
     public boolean hayTrampas() {
         boolean resultado = false;
-        for (int i = 0; i < trampas.length; i++){
+        for (int i = 0; i < trampas.length && !resultado; i++){
             if (trampas[i] != null){
                 resultado = true;
             }
@@ -229,7 +233,7 @@ public class Sala {
      */
     public boolean hayItems() {
         boolean resultado = false;
-        for (int i = 0; i < items.length; i++){
+        for (int i = 0; i < items.length && !resultado; i++){
             if (items[i] != null){
                 resultado = true;
             }
@@ -246,9 +250,14 @@ public class Sala {
      */
     public Item buscarItem(String descripcion) {
         Item resultado = null;
-        for (int i = 0; i < items.length; i++){
-            if (items[i].getDescripcion() == descripcion){
+        boolean encontrado = false;
+        int i = 0;
+        while (items[i] != null && i < items.length && !encontrado){
+            if (items[i].getDescripcion().equalsIgnoreCase(descripcion)){
                 resultado = items[i];
+                encontrado = true;
+            } else {
+                i++;
             }
         }
         return resultado;
@@ -263,9 +272,14 @@ public class Sala {
      */
     public Trampa buscarTrampa(String descripcion) {
         Trampa resultado = null;
-        for (int i = 0; i < trampas.length; i++){
-            if (trampas[i].getDescripcion() == descripcion){
+        boolean encontrado = false;
+        int i = 0;
+        while (trampas[i] != null && i < trampas.length && !encontrado){
+            if (trampas[i].getDescripcion().equalsIgnoreCase(descripcion)){
                 resultado = trampas[i];
+                encontrado = true;
+            } else {
+                i++;
             }
         }
         return resultado;
@@ -287,18 +301,31 @@ public class Sala {
      * @return
      */
     public Item seleccionarItem(Scanner teclado) {
-        Item resultado = null;
-        for (int i = 0; i < items.length; i++){
-            System.out.println(items[i].toString());
-        }
-        System.out.println("Introduzca una descripcion");
-        String resultado1 = teclado.next();
-        for (int i = 0; i < items.length; i++){
-            if (items[i].getDescripcion() == resultado1){
-                resultado = items[i];
+        String item;
+        listarItems();
+        do {
+            System.out.println("Introduzca el nombre del item que quiere seleccionar: ");
+            item = teclado.nextLine();
+        }while (!contieneItem(item));
+        Item resul = null;
+
+        boolean encontrado = false;
+        for (int i = 0; i < items.length && !encontrado; i++){
+            if (items[i].getDescripcion().equalsIgnoreCase(item)){
+                resul = items[i];
+                encontrado = true;
             }
         }
-        return resultado;
+        return resul;
+    }
+    private boolean contieneItem(String nombreItem){
+        boolean resul = false;
+        for (int i = 0; i < items.length; i++){
+            if (monstruos[i].getNombre().equalsIgnoreCase(nombreItem)){
+                resul = true;
+            }
+        }
+        return resul;
     }
 
     /**
@@ -319,9 +346,10 @@ public class Sala {
      */
     public void eliminarItem(String descripcion) {
         for (int i = 0; i < items.length; i++){
-            if (items[i].getDescripcion() == descripcion){
-                items[i + 1] = items[i];
-                items.length--;
+            if (items[i].getDescripcion().equalsIgnoreCase(descripcion) && items[i] != null){
+                if (items[i +1] != null){
+                    items[i] = items[i + 1];
+                }
             }
         }
     }
