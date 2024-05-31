@@ -128,6 +128,20 @@ public class Sala {
      * @return
      */
     public Monstruo seleccionarMonstruo(Scanner teclado) {
+        /*if (hayMonstruos()){
+            listarMonstruos();
+            boolean encontrado = false;
+            String nombre = "";
+            while (!encontrado) {
+                nombre = Utilidades.leerCadena(teclado, "Escribe el nombre del monstruo que quieres atacar: ");
+                if (buscarMonstruo(nombre) != null) {
+                    encontrado = true;
+                }
+            }
+            return buscarMonstruo(nombre);
+        }
+        else return null;
+        }*/
         if (hayMonstruos()){
             listarMonstruos();
             boolean encontrado = false;
