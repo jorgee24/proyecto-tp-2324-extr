@@ -314,14 +314,12 @@ public class Motor {
                     }
                 }
             }
-            if (salaActual.hayItems()) {
-                System.out.println();
+            if(salaActual.hayItems()){
                 Item item = salaActual.seleccionarItem(teclado);
-                if (personaje.getPesoMochila()) {
-                    if (personaje.anyadirItem(item)) {
+                while(item != null){
+                    if(personaje.anyadirItem(item)){
                         System.out.println("Has añadido el item a tu mochila");
-                        salaActual.eliminarItem(item.getDescripcion());
-                    } else {
+                    }else{
                         System.out.println("No puedes añadir el item a tu mochila");
                     }
                     item = salaActual.seleccionarItem(teclado);
