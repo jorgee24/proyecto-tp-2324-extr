@@ -54,8 +54,7 @@ public class Personaje {
             maxItemsPorPersonaje = 1;
         }
         Personaje personaje = new Personaje(nombre, vida, ataque, defensa, destreza, maxPesoPorPersonaje, maxItemsPorPersonaje);
-
-
+        return personaje;
     }
 
     /**
