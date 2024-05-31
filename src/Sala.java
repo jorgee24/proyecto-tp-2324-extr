@@ -23,9 +23,9 @@ public class Sala {
      */
     public Sala(String descripcion, int max_items, int max_monstruos, int maxTrampasPorSala, int fila, int columna) {
         this.descripcion = descripcion;
-        items = new Item[max_items];
-        monstruos = new Monstruo[max_monstruos];
-        trampas = new Trampa[maxTrampasPorSala];
+        items = new Item[max_items-1];
+        monstruos = new Monstruo[max_monstruos-1];
+        trampas = new Trampa[maxTrampasPorSala-1];
         this.fila = fila;
         this.columna = columna;
     }
@@ -61,18 +61,28 @@ public class Sala {
      * @return
      */
     public boolean agregarMonstruo(Monstruo monstruo) {
-        boolean resultado = false;
-        int i = 0;
-        while (i < monstruos.length && !resultado && !monstruos[i].equals(monstruo)){
-            if (monstruos[i] == null){
-                monstruos[i] = monstruo;
-                resultado = true;
-            }else {
+        boolean resultado = false, lleno= true, igual =false;
+        int i = 0, vacio =0;
+        while (i < monstruos.length && !resultado ){
+            if(monstruos[i]!=monstruo){
                 i++;
+                igual=true;
+            }else{
+                vacio=i;
+            }
+            if (monstruos[i] == null && lleno == true){
+                lleno =false;
             }
         }
+        if(lleno || igual){
+            resultado =false;
+        }else{
+            monstruos[vacio]=monstruo;
+        }
+
         return resultado;
     }
+
 
     /**
      * Método agregarTrampa para incluir una trampa en la sala
@@ -82,16 +92,25 @@ public class Sala {
      * @return
      */
     public boolean agregarTrampa(Trampa trampa) {
-        boolean resultado = false;
-        int i = 0;
-        while (i < trampas.length && !trampas[i].equals(trampa) && !resultado){
-            if (trampas[i] == null){
-                trampas[i] = trampa;
-                resultado = true;
-            } else {
+        boolean resultado = false, lleno= true, igual =false;
+        int i = 0, vacio =0;
+        while (i < trampas.length && !resultado ){
+            if(trampas[i]!=trampa){
                 i++;
+                igual=true;
+            }else{
+                vacio=i;
+            }
+            if (trampas[i] == null && lleno == true){
+                lleno =false;
             }
         }
+        if(lleno || igual){
+            resultado =false;
+        }else{
+            trampas[vacio]=trampa;
+        }
+
         return resultado;
     }
 
