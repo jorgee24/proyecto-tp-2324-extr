@@ -32,10 +32,12 @@ public class Utilidades {
     public static int leerNumero(Scanner teclado, String mensaje, int minimo, int maximo) {
         System.out.print(mensaje);
         int numero = teclado.nextInt();
+        teclado.nextLine();
         while (numero > maximo || numero < minimo) {
             System.out.println("Número incorrecto");
             System.out.print(mensaje);
             numero = teclado.nextInt();
+            teclado.nextLine();
         }
         return numero;
     }

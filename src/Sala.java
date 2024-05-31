@@ -26,9 +26,9 @@ public class Sala {
      */
     public Sala(String descripcion, int max_items, int max_monstruos, int maxTrampasPorSala, int fila, int columna) {
         this.descripcion = descripcion;
-        items = new Item[max_items-1];
-        monstruos = new Monstruo[max_monstruos-1];
-        trampas = new Trampa[maxTrampasPorSala-1];
+        items = new Item[max_items];
+        monstruos = new Monstruo[max_monstruos];
+        trampas = new Trampa[maxTrampasPorSala];
         this.fila = fila;
         this.columna = columna;
     }
@@ -350,8 +350,10 @@ public class Sala {
      *  items que hay en la sala
      */
     private void listarItems() {
-        for (int i = 0; i < items.length; i++){
-            System.out.println(items.toString());
+        if (hayItems()){
+            for (int i = 0; i < items.length; i++){
+                System.out.println(items[i].toString());
+            }
         }
     }
 
