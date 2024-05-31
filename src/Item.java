@@ -1,5 +1,8 @@
 /**
  * Clase Item
+ * @author Ainara Fernández Herreros
+ * @author Jorge López Sosa
+ * Grupo 24
  */
 public class Item {
     private final double peso;

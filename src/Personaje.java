@@ -2,6 +2,9 @@ import java.util.Scanner;
 
 /**
  * Clase Personaje
+ * @author Ainara Fernández Herreros
+ * @author Jorge López Sosa
+ * Grupo 24
  */
 public class Personaje {
     private final String nombre;

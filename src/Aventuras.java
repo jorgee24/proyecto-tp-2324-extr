@@ -5,6 +5,9 @@ import java.util.Scanner;
 
 /**
  * Clase principal de Aventuras desde donde lanzar la ejecución de la práctica
+ * @author Ainara Fernández Herreros
+ * @author Jorge López Sosa
+ * Grupo 24
  */
 public class Aventuras {
 

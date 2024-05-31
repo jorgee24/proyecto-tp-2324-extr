@@ -1,5 +1,8 @@
 /**
  * Clase Monstruo
+ * @author Ainara Fernández Herreros
+ * @author Jorge López Sosa
+ * Grupo 24
  */
 public class Monstruo {
     private int vida;

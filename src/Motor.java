@@ -7,6 +7,9 @@ import java.util.Scanner;
 
 /**
  * Clase Motor
+ * @author Ainara Fernández Herreros
+ * @author Jorge López Sosa
+ * Grupo 24
  */
 public class Motor {
     Sala[][] mapa;

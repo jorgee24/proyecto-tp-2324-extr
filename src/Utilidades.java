@@ -2,6 +2,9 @@ import java.util.Scanner;
 
 /**
  * Clase Utilidades
+ * @author Ainara Fernández Herreros
+ * @author Jorge López Sosa
+ * Grupo 24
  */
 public class Utilidades {
 
