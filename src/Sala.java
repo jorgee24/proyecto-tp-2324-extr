@@ -198,6 +198,22 @@ public class Sala {
      * @param nombreMonstruo
      */
     public void eliminarMonstruo(String nombreMonstruo) {
+        boolean encontrado = false;
+        int contador = 0;
+        int numMonstruos = monstruos.length;
+        while (contador < numMonstruos && !encontrado){
+            if (monstruos[contador].getNombre().equalsIgnoreCase(nombreMonstruo)){
+                while (contador < numMonstruos - 1){
+                    monstruos[contador] = monstruos[ contador + 1];
+                    contador++;
+                }
+                monstruos[numMonstruos - 1] = null;
+                encontrado = true;
+            }
+            contador++;
+        }
+
+
         for (int i = 0; i < monstruos.length; i++){
             if (monstruos != null){
                 if (monstruos[i].getNombre().equalsIgnoreCase(nombreMonstruo) && monstruos[i] != null){
@@ -205,6 +221,10 @@ public class Sala {
                     //monstruos[i] = monstruos[i + 1];
                 }
             }
+            if (eliminar){
+                monstruos[i] = monstruos[i + 1];
+            }
+
         }
     }
 
