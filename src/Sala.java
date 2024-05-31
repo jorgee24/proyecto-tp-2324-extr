@@ -141,9 +141,11 @@ public class Sala {
 
         boolean encontrado = false;
         for (int i = 0; i < monstruos.length && !encontrado; i++){
-            if (monstruos[i].getNombre().equalsIgnoreCase(monstruo)){
-                resul = monstruos[i];
-                encontrado = true;
+            if (monstruos[i] != null){
+                if (monstruos[i].getNombre().equalsIgnoreCase(monstruo)){
+                    resul = monstruos[i];
+                    encontrado = true;
+                }
             }
         }
         return resul;
@@ -151,8 +153,10 @@ public class Sala {
     private boolean contieneMonstruo(String nombreMonstruo){
         boolean resul = false;
         for (int i = 0; i < monstruos.length; i++){
-            if (monstruos[i].getNombre().equalsIgnoreCase(nombreMonstruo)){
-                resul = true;
+            if (monstruos[i] != null){
+                if (monstruos[i].getNombre().equalsIgnoreCase(nombreMonstruo)){
+                    resul = true;
+                }
             }
         }
         return resul;
@@ -182,7 +186,9 @@ public class Sala {
      */
     private void listarMonstruos() {
         for (int i = 0; i < monstruos.length; i++){
-            System.out.println(monstruos[i].toString());
+            if (monstruos[i] != null){
+                System.out.println(monstruos[i].toString());
+            }
         }
     }
 
@@ -194,10 +200,8 @@ public class Sala {
     public void eliminarMonstruo(String nombreMonstruo) {
         for (int i = 0; i < monstruos.length; i++){
             if (monstruos[i].getNombre().equalsIgnoreCase(nombreMonstruo) && monstruos[i] != null){
-                if (monstruos[i + 1] != null){
-                    monstruos[i] = monstruos[i + 1];
-                    //eliminar numMonstruos?
-                }
+                monstruos[i] = null;
+                //monstruos[i] = monstruos[i + 1];
             }
         }
     }
