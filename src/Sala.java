@@ -212,20 +212,6 @@ public class Sala {
             }
             contador++;
         }
-
-
-        for (int i = 0; i < monstruos.length; i++){
-            if (monstruos != null){
-                if (monstruos[i].getNombre().equalsIgnoreCase(nombreMonstruo) && monstruos[i] != null){
-                    monstruos[i] = null;
-                    //monstruos[i] = monstruos[i + 1];
-                }
-            }
-            if (eliminar){
-                monstruos[i] = monstruos[i + 1];
-            }
-
-        }
     }
 
     /**
