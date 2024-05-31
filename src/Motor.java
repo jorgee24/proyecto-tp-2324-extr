@@ -278,55 +278,6 @@ public class Motor {
      * @param random
      */
     public void jugar(Scanner teclado, Personaje personaje, Random random) {
-        /*boolean salir = false;
-        System.out.println(mostrarMapa(0, 0));
-        Sala salaActual = mapa[0][0];
-        while (personaje.getVida() > 0 && salaActual.getFila() != mapa.length - 1 && salaActual.getColumna() != mapa[0].length - 1 && !salir) {
-            System.out.println(salaActual.getDescripcion());
-            if (salaActual.hayMonstruos()) {
-                Monstruo monstruo = salaActual.seleccionarMonstruo(teclado);
-                while (personaje.getVida() > 0 && monstruo.getVida() > 0) {
-                    monstruo.recibirDanyo(personaje.getAtaque());
-                    if (monstruo.getVida() > 0) {
-                        personaje.recibirDanyo(monstruo.getAtaque());
-                    } else {
-                        salaActual.eliminarMonstruo(monstruo.getNombre());
-                    }
-                    if (personaje.getVida() <= 0) {
-                        System.out.println("El mounstro te ha eliminado, fin del juego");
-                        salir = true;
-                    }
-                }
-            }
-
-            if (salaActual.hayTrampas()) {
-                for (int i = 0; i < salaActual.getTrampas().length; i++) {
-                    if (salaActual.getTrampas()[i] != null) {
-                        if (random.nextInt(50) < personaje.getDestreza()) {
-                            System.out.println("Has esquivado la trampa");
-                        } else {
-                            personaje.recibirDanyo(salaActual.getTrampas()[i].getDanyo());
-                            if (personaje.getVida() <= 0) {
-                                System.out.println("Has caido en una trampa y no has sobrevivido, fin del juego");
-                                salir = true;
-                            }
-                        }
-                    }
-                }
-            }
-            if(salaActual.hayItems()){
-                Item item = salaActual.seleccionarItem(teclado);
-                while(item != null){
-                    if(personaje.anyadirItem(item)){
-                        System.out.println("Has añadido el item a tu mochila");
-                    }else{
-                        System.out.println("No puedes añadir el item a tu mochila");
-                    }
-                    item = salaActual.seleccionarItem(teclado);
-                }
-            }
-            seleccionarMovimiento(teclado, salaActual);
-        }*/
         boolean salir = false;
         System.out.println(mostrarMapa(0,0));
         Sala salaActual = mapa[0][0];
