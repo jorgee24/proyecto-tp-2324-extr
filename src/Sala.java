@@ -199,9 +199,11 @@ public class Sala {
      */
     public void eliminarMonstruo(String nombreMonstruo) {
         for (int i = 0; i < monstruos.length; i++){
-            if (monstruos[i].getNombre().equalsIgnoreCase(nombreMonstruo) && monstruos[i] != null){
-                monstruos[i] = null;
-                //monstruos[i] = monstruos[i + 1];
+            if (monstruos != null){
+                if (monstruos[i].getNombre().equalsIgnoreCase(nombreMonstruo) && monstruos[i] != null){
+                    monstruos[i] = null;
+                    //monstruos[i] = monstruos[i + 1];
+                }
             }
         }
     }
