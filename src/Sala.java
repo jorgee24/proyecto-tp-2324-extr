@@ -40,12 +40,14 @@ public class Sala {
     public boolean agregarItem(Item item) {
         boolean resultado = false;
         int i = 0;
-        while (i < items.length && !resultado && !items[i].equals(item)){
-            if (items[i] == null){
-                items[i] = item;
-                resultado = true;
-            } else {
-                i++;
+        if (items[i] != null){
+            while (i < items.length && !resultado && !items[i].equals(item)){
+                if (items[i] == null){
+                    items[i] = item;
+                    resultado = true;
+                } else {
+                    i++;
+                }
             }
         }
         return resultado;

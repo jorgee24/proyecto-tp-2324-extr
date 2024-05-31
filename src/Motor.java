@@ -126,9 +126,13 @@ public class Motor {
             while ((linea = entrada.readLine()) != null) {
                 String[] partes = linea.split(";");
                 int fila = Integer.parseInt(partes[0]);
-                if (fila > 0) fila--;
+                if (fila > 0){
+                    fila--;
+                }
                 int columna = Integer.parseInt(partes[1]);
-                if (columna > 0) columna--;
+                if (columna > 0) {
+                    columna--;
+                }
                 String descripcion = partes[2];
                 int vida = Integer.parseInt(partes[3]);
                 int ataque = Integer.parseInt(partes[4]);
@@ -166,9 +170,13 @@ public class Motor {
             while ((linea = entrada.readLine()) != null) {
                 String[] partes = linea.split(";");
                 int fila = Integer.parseInt(partes[0]);
-                if (fila > 0) fila--;
+                if (fila > 0){
+                    fila--;
+                }
                 int columna = Integer.parseInt(partes[1]);
-                if (columna > 0) columna--;
+                if (columna > 0) {
+                    columna--;
+                }
                 String descripcion = partes[2];
                 int danio = Integer.parseInt(partes[3]);
                 Trampa trampa = new Trampa(descripcion, danio);
