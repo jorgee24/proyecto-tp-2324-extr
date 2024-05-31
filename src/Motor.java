@@ -414,7 +414,6 @@ public class Motor {
                     nuevaSala = salaActual;
             }
         } while (nuevaSala == salaActual);
-
         return nuevaSala;
     }
 }
