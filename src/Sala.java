@@ -61,25 +61,18 @@ public class Sala {
      * @return
      */
     public boolean agregarMonstruo(Monstruo monstruo) {
-        boolean resultado = false, lleno= true, igual =false;
-        int i = 0, vacio =0;
-        while (i < monstruos.length && !resultado ){
-            if(monstruos[i]!=monstruo){
-                i++;
-                igual=true;
-            }else{
-                vacio=i;
+        boolean resultado = false;
+        boolean existe = false;
+        for (int i = 0; i < monstruos.length; i++){
+            if (monstruos[i].equals(monstruo)){
+                existe = true;
             }
-            if (monstruos[i] == null && lleno == true){
-                lleno =false;
+            if (monstruos[i] == null && !existe){
+                monstruos[i] = monstruo;
+                resultado = true;
+                existe = true;
             }
         }
-        if(lleno || igual){
-            resultado =false;
-        }else{
-            monstruos[vacio]=monstruo;
-        }
-
         return resultado;
     }
 
